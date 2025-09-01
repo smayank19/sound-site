@@ -11,6 +11,10 @@
             padding: 0;
         }
 
+        .active-btn {
+            background-color: white !important;
+        }
+
         .video {
             position: fixed;
             top: 0;
@@ -41,19 +45,26 @@
             right: 20px;
         }
 
-        .button-3 {
+        .button-3,
+        .button-4 {
+            background-color: white;
             position: fixed;
             bottom: 60px;
             left: 40px;
+        }
+
+        .button-4 {
+            display: none;
+            /* hidden by default */
         }
     </style>
 </head>
 
 <body>
-    <video class="video rain-v" src="rain.mp4" loop muted></video>
+    <video class="video rain-v" src="rain.mp4" loop muted autoplay playsinline></video>
     <audio class="rain-a" src="rain.mp3"></audio>
 
-    <video class="video wind-v" src="wind.mp4" loop muted style="display:none;"></video>
+    <video class="video wind-v" src="wind.mp4" loop muted autoplay playsinline style="display:none;"></video>
     <audio class="wind-a" src="wind.mp3"></audio>
 
     <div class="buttons">
@@ -74,91 +85,112 @@
             <path d="M9.8 4.4A2 2 0 1 1 11 8H2"></path>
         </svg>
 
-        <svg class="button button-3 lucide-wind" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round" class="lucide lucide-volume-x">
+        <svg class="button button-3 mute" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-volume-x">
             <path
                 d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z">
             </path>
             <line x1="22" x2="16" y1="9" y2="15"></line>
             <line x1="16" x2="22" y1="9" y2="15"></line>
         </svg>
+
+        <svg class="button button-4 unmute" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" class="lucide lucide-volume2">
+            <path
+                d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z">
+            </path>
+            <path d="M16 9a5 5 0 0 1 0 6"></path>
+            <path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path>
+        </svg>
     </div>
 
     <script>
-    // Select elements
-    const rainVideo = document.querySelector(".rain-v");
-    const windVideo = document.querySelector(".wind-v");
-    const rainAudio = document.querySelector(".rain-a");
-    const windAudio = document.querySelector(".wind-a");
+        // Grab elements
+        const rainVideo = document.querySelector(".rain-v");
+        const windVideo = document.querySelector(".wind-v");
+        const rainAudio = document.querySelector(".rain-a");
+        const windAudio = document.querySelector(".wind-a");
 
-    const rainBtn = document.querySelector(".button-1");
-    const windBtn = document.querySelector(".button-2");
-    const muteBtn = document.querySelector(".button-3");
+        const rainBtn = document.querySelector(".button-1");
+        const windBtn = document.querySelector(".button-2");
+        const muteBtn = document.querySelector(".button-3");    // mute icon (volume-x)
+        const unmuteBtn = document.querySelector(".button-4");  // unmute icon (volume waves)
 
-    // Function to play rain
-    function playRain() {
-        rainVideo.style.display = "block";
-        windVideo.style.display = "none";
-
-        rainVideo.play();
-        rainAudio.play();
-
-        windVideo.pause();
-        windAudio.pause();
-        windVideo.currentTime = 0;
-        windAudio.currentTime = 0;
-
-        rainBtn.style.backgroundColor = "white";
-        windBtn.style.backgroundColor = "";
-    }
-
-    // Function to play wind
-    function playWind() {
-        windVideo.style.display = "block";
-        rainVideo.style.display = "none";
-
-        windVideo.play();
-        windAudio.play();
-
-        rainVideo.pause();
-        rainAudio.pause();
-        rainVideo.currentTime = 0;
-        rainAudio.currentTime = 0;
-
-        windBtn.style.backgroundColor = "white";
-        rainBtn.style.backgroundColor = "";
-    }
-
-    // Function to toggle mute
-    function toggleMute() {
-        const isMuted = rainAudio.muted && windAudio.muted;
-
-        if (isMuted) {
-            // Unmute both audios
-            rainAudio.muted = false;
-            windAudio.muted = false;
-            muteBtn.style.backgroundColor = "white"; // button ON
-        } else {
-            // Mute both audios
-            rainAudio.muted = true;
-            windAudio.muted = true;
-            muteBtn.style.backgroundColor = ""; // reset button color
+        // Helpers
+        function applyMutedUI(isMuted) {
+            muteBtn.style.display = isMuted ? "block" : "none";
+            unmuteBtn.style.display = isMuted ? "none" : "block";
         }
-    }
 
-    // Button click events
-    rainBtn.addEventListener("click", playRain);
-    windBtn.addEventListener("click", playWind);
-    muteBtn.addEventListener("click", toggleMute);
+        function setMuted(isMuted) {
+            rainAudio.muted = isMuted;
+            windAudio.muted = isMuted;
+            applyMutedUI(isMuted);
 
-    // 🔥 Start with rain when page loads
-    window.addEventListener("load", () => {
-        rainAudio.muted = true; // start muted
-        windAudio.muted = true; // start muted
-        playRain();
-    });
-</script>
+            if (!isMuted) {
+                if (rainVideo.style.display !== "none") {
+                    rainAudio.play();
+                } else {
+                    windAudio.play();
+                }
+            }
+        }
+
+        // Reset button styles
+        function resetBtnColors() {
+            rainBtn.style.backgroundColor = "";
+            windBtn.style.backgroundColor = "";
+        }
+
+        // Source switching
+        function playRain() {
+            rainVideo.style.display = "block";
+            windVideo.style.display = "none";
+
+            rainVideo.play();
+            rainAudio.play();
+
+            windVideo.pause();
+            windAudio.pause();
+            windVideo.currentTime = 0;
+            windAudio.currentTime = 0;
+
+            resetBtnColors();
+            rainBtn.style.backgroundColor = "white";
+        }
+
+        function playWind() {
+            windVideo.style.display = "block";
+            rainVideo.style.display = "none";
+
+            windVideo.play();
+            windAudio.play();
+
+            rainVideo.pause();
+            rainAudio.pause();
+            rainVideo.currentTime = 0;
+            rainAudio.currentTime = 0;
+
+            resetBtnColors();
+            windBtn.style.backgroundColor = "white";
+        }
+
+        // Button events
+        rainBtn.addEventListener("click", playRain);
+        windBtn.addEventListener("click", playWind);
+
+        muteBtn.addEventListener("click", () => setMuted(false));
+        unmuteBtn.addEventListener("click", () => setMuted(true));
+
+        // Start: rain playing, muted, show mute icon
+        window.addEventListener("load", () => {
+            playRain();
+            setMuted(true);
+        });
+    </script>
+
 
 </body>
 
