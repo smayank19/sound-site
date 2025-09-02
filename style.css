@@ -1,0 +1,72 @@
+ * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .active-btn {
+            background-color: white !important;
+        }
+
+        .video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+            display: none;
+        }
+
+
+        .button {
+            padding: 5px;
+            border: 0px solid rgba(255, 255, 255, 0.052);
+            ;
+            border-radius: 50px;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.301);
+        }
+
+        .button-1 {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .button-2 {
+            position: fixed;
+            bottom: 60px;
+            right: 20px;
+        }
+
+        .button-3,
+        .button-4 {
+            background-color: white;
+            position: fixed;
+            bottom: 60px;
+            left: 40px;
+        }
+
+        .button-4 {
+            display: none;
+            /* hidden by default */
+        }
+
+        .button-5 {
+            height: 26px;
+            width: 26px;
+            padding: 3px;
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+        }
+
+        .button-6 {
+            height: 20px;
+            width: 20px;
+            padding: 6px;
+            position: fixed;
+            bottom: 140px;
+            right: 20px;
+        }

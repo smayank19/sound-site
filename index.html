@@ -4,78 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Android Chrome: dark top bar -->
-  <meta name="theme-color" content="#121212">
+    <!-- Android Chrome: dark top bar -->
+    <meta name="theme-color" content="#121212">
 
-  <!-- iOS Safari: dark status bar -->
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- iOS Safari: dark status bar -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
     <title>SOUNDS</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        .active-btn {
-            background-color: white !important;
-        }
-
-        .video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            z-index: -1;
-            display: none;
-        }
-
-
-        .button {
-            padding: 5px;
-            border: 0px solid rgba(255, 255, 255, 0.052);;
-            border-radius: 50px;
-            cursor: pointer;
-            background-color: rgba(255, 255, 255, 0.301);
-        }
-
-        .button-1 {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-        }
-
-        .button-2 {
-            position: fixed;
-            bottom: 60px;
-            right: 20px;
-        }
-
-        .button-3,
-        .button-4 {
-            background-color: white;
-            position: fixed;
-            bottom: 60px;
-            left: 40px;
-        }
-
-        .button-4 {
-            display: none;
-            /* hidden by default */
-        }
-
-        .button-5{
-            height: 26px;
-            width: 26px;
-            padding: 3px;
-            position: fixed;
-            bottom: 100px;
-            right: 20px;   
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -87,7 +25,10 @@
 
     <video class="video bird-v" src="bird.mp4" loop muted autoplay playsinline style="display:none;"></video>
     <audio class="bird-a" src="bird.mp3" preload="auto" loop></audio>
-    
+
+    <video class="video water-v" src="water.mp4" loop muted autoplay playsinline style="display:none;"></video>
+    <audio class="water-a" src="water.mp3" preload="auto" loop></audio>
+
     <div class="buttons">
         <svg class="button button-1 lucide-cloud-rain" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -129,130 +70,23 @@
         <!-- <svg class="button button-5 tree" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide lucide-trees"> -->
-            <img class="button button-5 bird" src="bird.png" alt="">
-            <path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z"></path>
-            <path d="M7 16v6"></path>
-            <path d="M13 19v3"></path>
-            <path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5">
-            </path>
+        <img class="button button-5 bird" src="bird.png" alt="">
+        <path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z"></path>
+        <path d="M7 16v6"></path>
+        <path d="M13 19v3"></path>
+        <path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5">
+        </path>
+        </svg>
+
+        <svg class="button button-6 water" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-waves">
+            <path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
+            <path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
+            <path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path>
         </svg>
     </div>
-
-    <script>
-    // Grab elements
-    const rainVideo = document.querySelector(".rain-v");
-    const windVideo = document.querySelector(".wind-v");
-    const birdVideo = document.querySelector(".bird-v");
-
-    const rainAudio = document.querySelector(".rain-a");
-    const windAudio = document.querySelector(".wind-a");
-    const birdAudio = document.querySelector(".bird-a");
-
-    const rainBtn = document.querySelector(".button-1");
-    const windBtn = document.querySelector(".button-2");
-    const muteBtn = document.querySelector(".button-3");    // mute icon (volume-x)
-    const unmuteBtn = document.querySelector(".button-4");  // unmute icon (volume waves)
-    const birdBtn = document.querySelector(".button-5");
-
-    // Helpers
-    function applyMutedUI(isMuted) {
-        muteBtn.style.display = isMuted ? "block" : "none";
-        unmuteBtn.style.display = isMuted ? "none" : "block";
-    }
-
-    function setMuted(isMuted) {
-        rainAudio.muted = isMuted;
-        windAudio.muted = isMuted;
-        birdAudio.muted = isMuted;
-        applyMutedUI(isMuted);
-
-        if (!isMuted) {
-            if (rainVideo.style.display !== "none") {
-                rainAudio.play();
-            } else if (windVideo.style.display !== "none") {
-                windAudio.play();
-            } else {
-                birdAudio.play();
-            }
-        }
-    }
-
-    // Reset button styles
-    function resetBtnColors() {
-        rainBtn.style.backgroundColor = "";
-        windBtn.style.backgroundColor = "";
-        birdBtn.style.backgroundColor = "";
-    }
-
-    // Source switching
-    function playRain() {
-        rainVideo.style.display = "block";
-        windVideo.style.display = "none";
-        birdVideo.style.display = "none";
-
-        rainVideo.play();
-        rainAudio.play();
-
-        windVideo.pause(); windAudio.pause();
-        birdVideo.pause(); birdAudio.pause();
-        windVideo.currentTime = 0; windAudio.currentTime = 0;
-        birdVideo.currentTime = 0; birdAudio.currentTime = 0;
-
-        resetBtnColors();
-        rainBtn.style.backgroundColor = "white";
-    }
-
-    function playWind() {
-        windVideo.style.display = "block";
-        rainVideo.style.display = "none";
-        birdVideo.style.display = "none";
-
-        windVideo.play();
-        windAudio.play();
-
-        rainVideo.pause(); rainAudio.pause();
-        birdVideo.pause(); birdAudio.pause();
-        rainVideo.currentTime = 0; rainAudio.currentTime = 0;
-        birdVideo.currentTime = 0; birdAudio.currentTime = 0;
-
-        resetBtnColors();
-        windBtn.style.backgroundColor = "white";
-    }
-
-    function playBird() {
-        birdVideo.style.display = "block";
-        rainVideo.style.display = "none";
-        windVideo.style.display = "none";
-
-        birdVideo.play();
-        birdAudio.play();
-
-        rainVideo.pause(); rainAudio.pause();
-        windVideo.pause(); windAudio.pause();
-        rainVideo.currentTime = 0; rainAudio.currentTime = 0;
-        windVideo.currentTime = 0; windAudio.currentTime = 0;
-
-        resetBtnColors();
-        birdBtn.style.backgroundColor = "white";
-    }
-
-    // Button events
-    rainBtn.addEventListener("click", playRain);
-    windBtn.addEventListener("click", playWind);
-    birdBtn.addEventListener("click", playBird);
-
-    muteBtn.addEventListener("click", () => setMuted(false));
-    unmuteBtn.addEventListener("click", () => setMuted(true));
-
-    // Start: rain playing, muted, show mute icon
-    window.addEventListener("load", () => {
-        playRain();
-        setMuted(true);
-    });
-</script>
-
-
-
+   <script src="script.js"></script>
 </body>
 
 </html>
