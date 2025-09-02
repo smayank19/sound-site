@@ -173,17 +173,41 @@ function playMeditation() {
     meditationBtn.style.backgroundColor = "white";
 }
 
-//space button 
-    document.addEventListener("keydown", (e) => {
-        if (e.code === "Space") {
-            e.preventDefault(); // stops page scroll
-            if (rainAudio.muted) {
-                setMuted(false); // unmute
-            } else {
-                setMuted(true);  // mute
-            }
+// Keyboard shortcuts
+document.addEventListener("keydown", (e) => {
+    if (e.code === "Space") {
+        e.preventDefault(); // stops page scroll
+        if (rainAudio.muted) {
+            setMuted(false); // unmute
+        } else {
+            setMuted(true);  // mute
         }
-    })
+    }
+
+    // Number row + Numpad support
+    switch (e.code) {
+        case "Digit1":
+        case "Numpad1":
+            playRain();
+            break;
+        case "Digit2":
+        case "Numpad2":
+            playWind();
+            break;
+        case "Digit3":
+        case "Numpad3":
+            playBird();
+            break;
+        case "Digit4":
+        case "Numpad4":
+            playWater();
+            break;
+        case "Digit5":
+        case "Numpad5":
+            playMeditation();
+            break;
+    }
+});
 
 // Button events
 rainBtn.addEventListener("click", playRain);
