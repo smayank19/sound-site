@@ -60,6 +60,18 @@ function resetBtnColors() {
     waterRemoveBtn.style.backgroundColor = ""; // NEW
 }
 
+//TITLE
+function showTitle(text) {
+    const title = document.getElementById("video-title");
+    title.textContent = text;
+
+    // Restart animation
+    title.classList.remove("show");
+    void title.offsetWidth; 
+    title.classList.add("show");
+}
+
+
 
 // Modes
 function playRain() {
@@ -87,6 +99,8 @@ function playRain() {
 
     resetBtnColors();
     rainBtn.style.backgroundColor = "white";
+    showTitle("RAIN");
+    
 }
 
 function playWind() {
@@ -115,6 +129,7 @@ function playWind() {
 
     resetBtnColors();
     windBtn.style.backgroundColor = "white";
+    showTitle("WIND");
 }
 
 function playBird() {
@@ -142,6 +157,7 @@ function playBird() {
 
     resetBtnColors();
     birdBtn.style.backgroundColor = "white";
+    showTitle("BIRD");
 }
 
 function playWater() {
@@ -169,6 +185,7 @@ function playWater() {
 
     resetBtnColors();
     waterBtn.style.backgroundColor = "white";
+    showTitle("WATER");
 }
 
 function playMeditation() {
@@ -196,6 +213,7 @@ function playMeditation() {
 
     resetBtnColors();
     meditationBtn.style.backgroundColor = "white";
+    showTitle("MEDITATION");
 }
 
 // New mode
@@ -224,6 +242,7 @@ function playWaterRemove() {
 
     resetBtnColors();
     waterRemoveBtn.style.backgroundColor = "#5cb5e1a4";
+    showTitle("WATER REMOVE");
 }
 
 // Keyboard shortcuts
