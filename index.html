@@ -20,6 +20,7 @@
 <body>
     <div id="video-title"></div>
 
+
     <video class="video rain-v" src="ASSESTS/rain.mp4" loop muted autoplay playsinline preload="auto"></video>
     <audio class="rain-a" src="ASSESTS/rain.mp3" preload="auto" loop></audio>
 
@@ -103,6 +104,19 @@
         <img class="button button-8 water-remove" src="ASSESTS/water_remove1.png" alt="">
 
     </div>
+
+    <div class="video-wrapper">
+  <video class="rain-v" src="rain.mp4" autoplay loop muted></video>
+  
+  <!-- Secret code box (hidden by default) -->
+ <video class="video secret-v" loop autoplay muted playsinline style="display:none;" preload="none"></video>
+ <div class="secret-box" id="secret-box">
+  <h2>Enter Secret Code</h2>
+  <input type="password" id="secret-input" placeholder="Enter code">
+  <button id="secret-submit">Unlock</button>
+</div>
+
+
 
     <script src="script.js"></script>
 </body>

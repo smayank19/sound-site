@@ -49,6 +49,19 @@ FONT USE
      display: none;
  }
 
+.secret-v {
+  position: fixed;         
+  /* top: 50%;                
+  left: 50%;               
+  transform: translate(-50%, -50%); */
+  
+  width: 100vw;
+  height: 100vh;         
+
+  object-fit: cover;     /* no cropping, full video visible */
+  z-index: 99;           
+}
+
 
  .button {
      padding: 5px;
@@ -188,30 +201,144 @@ FONT USE
  }
  }
 
-  @media (max-width: 600px) {
-     .meditation-v {
-         object-fit: cover;
-         object-position: 35% center;
-         /* adjust focus */
-     }
-
-     .water_remove-v {
-         object-fit: cover;
-         object-position: 35% center;
-     }
-
-    #video-title {
-     font-size: 15px;
-     /* letter-spacing: 10px; */
- }
- }
 
 
- /* Tablets (portrait & landscape) */
-@media (min-width: 601px) and (max-width: 1024px) 
-{
-    .meditation-v {
-         object-fit: cover;
-         object-position: 35% center;
-     }
+/* ================= SECRET POPUP ================= */
+.secret-box {
+  display: none; /* hidden until 27 clicks */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+
+  /* Glassmorphism */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 350px;
+  width: 90%;
+
+  animation: scaleIn 0.4s ease-out;
+  font-family: "Poppins", sans-serif;
+  color: white;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* Title */
+.secret-box h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 5PX;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+/* Smooth scale-in animation */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Input */
+.secret-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  /* margin-bottom: 20px; */
+  font-size: 16px;
+  border: none;
+  outline: none;
+
+  /* Glass input */
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+}
+
+/* Button */
+.secret-box button {
+  padding: 10px 22px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.25s ease-in-out;
+}
+
+.secret-box button:hover {
+  background: #222;
+}
+
+/* ================= MOBILE ADJUSTMENTS ================= */
+@media (max-width: 600px) {
+  .secret-box {
+    max-width: 90%;
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .secret-box h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .secret-box input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .secret-box button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  #video-title {
+    font-size: 15px;
+  }
+
+  .meditation-v,
+  .water_remove-v {
+    object-fit: cover;
+    object-position: 35% center;
+  }
+}
+
+/* ================= TABLET ADJUSTMENTS ================= */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .secret-box {
+    max-width: 400px;
+    padding: 2rem;
+  }
+
+  .secret-box h2 {
+    font-size: 1.3rem;
+  }
+
+  .secret-box input {
+    font-size: 15px;
+    padding: 11px;
+  }
+
+  .secret-box button {
+    font-size: 15px;
+    padding: 10px 20px;
+  }
+
+  .meditation-v {
+    object-fit: cover;
+    object-position: 35% center;
+  }
 }

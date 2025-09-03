@@ -300,3 +300,80 @@ window.addEventListener("load", () => {
     playRain();
     setMuted(true);
 });
+
+//SECRET VIDEO 
+//SECRET VIDEO 
+/*------------------------------------------------------------------------*/
+let clickCount = 0;
+let secretUnlocked = false;
+const SECRET_CODE = "hi";
+
+const secretBox = document.getElementById("secret-box");
+const input = document.getElementById("secret-input");
+const submitBtn = document.getElementById("secret-submit");
+const secretVideo = document.querySelector(".secret-v");
+
+document.querySelectorAll("video").forEach(video => {
+    video.addEventListener("click", () => {
+        if (secretUnlocked) return;
+
+        clickCount++;
+
+        if (clickCount === 2) {
+            secretBox.style.display = "block"; // show inside same div
+            input.value = "";
+            input.focus();
+        }
+    });
+});
+
+submitBtn.addEventListener("click", checkSecret);
+input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") checkSecret();
+});
+
+function checkSecret() {
+    if (input.value === SECRET_CODE) {
+        unlockSecretVideo();
+        secretBox.style.display = "none";
+    } else {
+        clickCount = 0;
+        secretBox.style.display = "none";
+    }
+}
+
+function unlockSecretVideo() {
+    secretUnlocked = true;
+    clickCount = 0;
+
+    secretVideo.src = "ASSESTS/secret.mp4";
+    secretVideo.style.display = "block";
+
+    document.querySelectorAll("video").forEach(v => {
+        if (v !== secretVideo) {
+            v.pause();
+            v.style.display = "none";
+        }
+    });
+    document.querySelectorAll("audio").forEach(a => a.pause());
+
+    secretVideo.play();
+    showTitle("SECRET");
+
+}
+
+// Array of all normal video buttons
+const normalVideoButtons = [rainBtn, windBtn, birdBtn, waterBtn, meditationBtn, waterRemoveBtn];
+
+// Add a listener to hide the secret video when any normal button is clicked
+normalVideoButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+        if (secretUnlocked) {
+            secretVideo.pause();
+            secretVideo.style.display = "none";
+            secretUnlocked = false;
+
+             resetBtnColors();
+        }
+    });
+});
