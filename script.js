@@ -185,7 +185,8 @@ document.addEventListener("keydown", (e) => {
     }
 
     // Number row + Numpad support
-    switch (e.code) {
+    switch (e.code) 
+    {
         case "Digit1":
         case "Numpad1":
             playRain();
