@@ -306,7 +306,7 @@ window.addEventListener("load", () => {
 /*------------------------------------------------------------------------*/
 let clickCount = 0;
 let secretUnlocked = false;
-const SECRET_CODE = "hi";
+const SECRET_CODE = "dumbo";
 
 const secretBox = document.getElementById("secret-box");
 const input = document.getElementById("secret-input");
@@ -319,7 +319,7 @@ document.querySelectorAll("video").forEach(video => {
 
         clickCount++;
 
-        if (clickCount === 2) {
+        if (clickCount === 11) {
             secretBox.style.display = "block"; // show inside same div
             input.value = "";
             input.focus();
