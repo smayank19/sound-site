@@ -82,3 +82,12 @@
             bottom: 180px;
             right: 20px;
         }
+
+/* iPhone 12 Pro portrait */
+/* For all phone screens */
+@media (max-width: 600px) {
+  .meditation-v {
+    object-fit: cover;          /* video still covers container */
+    object-position: 35% center; /* move focus to the right */
+  }
+}
