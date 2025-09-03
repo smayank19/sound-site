@@ -83,11 +83,33 @@
             right: 20px;
         }
 
+    .button-8 {
+            height: 20px;
+            width: 20px;
+            padding: 6px;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
 /* iPhone 12 Pro portrait */
 /* For all phone screens */
 @media (max-width: 600px) {
   .meditation-v {
-    object-fit: cover;          /* video still covers container */
-    object-position: 35% center; /* move focus to the right */
+    object-fit: cover;
+    object-position: 35% center; /* adjust focus */
+  }
+
+  .water-v {
+    margin: 0;
+    padding: 0;
+    object-fit: cover;
+    object-position: right center; /* or try 100% center */
+     transform: scale(2.2);
+  }
+
+  .water_remove-v {
+    object-fit: cover;
+    object-position: 35% center;
   }
 }
+

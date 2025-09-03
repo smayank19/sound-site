@@ -4,18 +4,22 @@ const windVideo = document.querySelector(".wind-v");
 const birdVideo = document.querySelector(".bird-v");
 const waterVideo = document.querySelector(".water-v");
 const meditationVideo = document.querySelector(".meditation-v");
+const waterRemoveVideo = document.querySelector(".water_remove-v");
 
 const rainAudio = document.querySelector(".rain-a");
 const windAudio = document.querySelector(".wind-a");
 const birdAudio = document.querySelector(".bird-a");
 const waterAudio = document.querySelector(".water-a");
 const meditationAudio = document.querySelector(".meditation-a");
+const waterRemoveAudio = document.querySelector(".water_remove-a");
+
 
 const rainBtn = document.querySelector(".button-1");
 const windBtn = document.querySelector(".button-2");
 const birdBtn = document.querySelector(".button-5");
 const waterBtn = document.querySelector(".button-6");
 const meditationBtn = document.querySelector(".button-7");
+const waterRemoveBtn = document.querySelector(".button-8");
 
 const muteBtn = document.querySelector(".button-3");    // mute icon
 const unmuteBtn = document.querySelector(".button-4");  // unmute icon
@@ -26,12 +30,14 @@ function applyMutedUI(isMuted) {
     unmuteBtn.style.display = isMuted ? "none" : "block";
 }
 
+// Helpers (update mute function)
 function setMuted(isMuted) {
     rainAudio.muted = isMuted;
     windAudio.muted = isMuted;
     birdAudio.muted = isMuted;
     waterAudio.muted = isMuted;
     meditationAudio.muted = isMuted;
+    waterRemoveAudio.muted = isMuted;   // NEW
 
     applyMutedUI(isMuted);
 
@@ -40,7 +46,8 @@ function setMuted(isMuted) {
         else if (windVideo.style.display !== "none") windAudio.play();
         else if (birdVideo.style.display !== "none") birdAudio.play();
         else if (waterVideo.style.display !== "none") waterAudio.play();
-        else meditationAudio.play();
+        else if (meditationVideo.style.display !== "none") meditationAudio.play();
+        else if (waterRemoveVideo.style.display !== "none") waterRemoveAudio.play();  // NEW
     }
 }
 
@@ -50,7 +57,9 @@ function resetBtnColors() {
     birdBtn.style.backgroundColor = "";
     waterBtn.style.backgroundColor = "";
     meditationBtn.style.backgroundColor = "";
+    waterRemoveBtn.style.backgroundColor = ""; // NEW
 }
+
 
 // Modes
 function playRain() {
@@ -59,6 +68,7 @@ function playRain() {
     birdVideo.style.display = "none";
     waterVideo.style.display = "none";
     meditationVideo.style.display = "none";
+    waterRemoveVideo.style.display = "none";
 
     rainVideo.play();
     rainAudio.play();
@@ -67,11 +77,13 @@ function playRain() {
     birdVideo.pause(); birdAudio.pause();
     waterVideo.pause(); waterAudio.pause();
     meditationVideo.pause(); meditationAudio.pause();
+    waterRemoveVideo.pause(); waterRemoveAudio.pause();
 
     windVideo.currentTime = windAudio.currentTime = 0;
     birdVideo.currentTime = birdAudio.currentTime = 0;
     waterVideo.currentTime = waterAudio.currentTime = 0;
     meditationVideo.currentTime = meditationAudio.currentTime = 0;
+    waterRemoveVideo.currentTime = waterRemoveAudio.currentTime = 0;
 
     resetBtnColors();
     rainBtn.style.backgroundColor = "white";
@@ -83,6 +95,7 @@ function playWind() {
     birdVideo.style.display = "none";
     waterVideo.style.display = "none";
     meditationVideo.style.display = "none";
+    waterRemoveVideo.style.display = "none";
 
     windVideo.play();
     windAudio.play();
@@ -91,11 +104,14 @@ function playWind() {
     birdVideo.pause(); birdAudio.pause();
     waterVideo.pause(); waterAudio.pause();
     meditationVideo.pause(); meditationAudio.pause();
+    waterRemoveVideo.pause(); waterRemoveAudio.pause();
+
 
     rainVideo.currentTime = rainAudio.currentTime = 0;
     birdVideo.currentTime = birdAudio.currentTime = 0;
     waterVideo.currentTime = waterAudio.currentTime = 0;
     meditationVideo.currentTime = meditationAudio.currentTime = 0;
+    waterRemoveVideo.currentTime = waterRemoveAudio.currentTime = 0;
 
     resetBtnColors();
     windBtn.style.backgroundColor = "white";
@@ -107,6 +123,7 @@ function playBird() {
     windVideo.style.display = "none";
     waterVideo.style.display = "none";
     meditationVideo.style.display = "none";
+    waterRemoveVideo.style.display = "none";
 
     birdVideo.play();
     birdAudio.play();
@@ -115,11 +132,13 @@ function playBird() {
     windVideo.pause(); windAudio.pause();
     waterVideo.pause(); waterAudio.pause();
     meditationVideo.pause(); meditationAudio.pause();
+    waterRemoveVideo.pause(); waterRemoveAudio.pause();
 
     rainVideo.currentTime = rainAudio.currentTime = 0;
     windVideo.currentTime = windAudio.currentTime = 0;
     waterVideo.currentTime = waterAudio.currentTime = 0;
     meditationVideo.currentTime = meditationAudio.currentTime = 0;
+    waterRemoveVideo.currentTime = waterRemoveAudio.currentTime = 0;
 
     resetBtnColors();
     birdBtn.style.backgroundColor = "white";
@@ -131,6 +150,7 @@ function playWater() {
     windVideo.style.display = "none";
     birdVideo.style.display = "none";
     meditationVideo.style.display = "none";
+    waterRemoveVideo.style.display = "none";
 
     waterVideo.play();
     waterAudio.play();
@@ -139,11 +159,13 @@ function playWater() {
     windVideo.pause(); windAudio.pause();
     birdVideo.pause(); birdAudio.pause();
     meditationVideo.pause(); meditationAudio.pause();
+    waterRemoveVideo.pause(); waterRemoveAudio.pause();
 
     rainVideo.currentTime = rainAudio.currentTime = 0;
     windVideo.currentTime = windAudio.currentTime = 0;
     birdVideo.currentTime = birdAudio.currentTime = 0;
     meditationVideo.currentTime = meditationAudio.currentTime = 0;
+    waterRemoveVideo.currentTime = waterRemoveAudio.currentTime = 0;
 
     resetBtnColors();
     waterBtn.style.backgroundColor = "white";
@@ -155,6 +177,7 @@ function playMeditation() {
     windVideo.style.display = "none";
     birdVideo.style.display = "none";
     waterVideo.style.display = "none";
+    waterRemoveVideo.style.display = "none";
 
     meditationVideo.play();
     meditationAudio.play();
@@ -163,14 +186,44 @@ function playMeditation() {
     windVideo.pause(); windAudio.pause();
     birdVideo.pause(); birdAudio.pause();
     waterVideo.pause(); waterAudio.pause();
+    waterRemoveVideo.pause(); waterRemoveAudio.pause();
 
     rainVideo.currentTime = rainAudio.currentTime = 0;
     windVideo.currentTime = windAudio.currentTime = 0;
     birdVideo.currentTime = birdAudio.currentTime = 0;
     waterVideo.currentTime = waterAudio.currentTime = 0;
+    waterRemoveVideo.currentTime = waterRemoveAudio.currentTime = 0;
 
     resetBtnColors();
     meditationBtn.style.backgroundColor = "white";
+}
+
+// New mode
+function playWaterRemove() {
+    waterRemoveVideo.style.display = "block";
+    rainVideo.style.display = "none";
+    windVideo.style.display = "none";
+    birdVideo.style.display = "none";
+    waterVideo.style.display = "none";
+    meditationVideo.style.display = "none";
+
+    waterRemoveVideo.play();
+    waterRemoveAudio.play();
+
+    rainVideo.pause(); rainAudio.pause();
+    windVideo.pause(); windAudio.pause();
+    birdVideo.pause(); birdAudio.pause();
+    waterVideo.pause(); waterAudio.pause();
+    meditationVideo.pause(); meditationAudio.pause();
+
+    rainVideo.currentTime = rainAudio.currentTime = 0;
+    windVideo.currentTime = windAudio.currentTime = 0;
+    birdVideo.currentTime = birdAudio.currentTime = 0;
+    waterVideo.currentTime = waterAudio.currentTime = 0;
+    meditationVideo.currentTime = meditationAudio.currentTime = 0;
+
+    resetBtnColors();
+    waterRemoveBtn.style.backgroundColor = "#5cb5e1a4";
 }
 
 // Keyboard shortcuts
@@ -185,8 +238,7 @@ document.addEventListener("keydown", (e) => {
     }
 
     // Number row + Numpad support
-    switch (e.code) 
-    {
+    switch (e.code) {
         case "Digit1":
         case "Numpad1":
             playRain();
@@ -207,6 +259,8 @@ document.addEventListener("keydown", (e) => {
         case "Numpad5":
             playMeditation();
             break;
+        case "Digit6":
+        case "Numpad6": playWaterRemove(); break;  // NEW
     }
 });
 
@@ -216,6 +270,7 @@ windBtn.addEventListener("click", playWind);
 birdBtn.addEventListener("click", playBird);
 waterBtn.addEventListener("click", playWater);
 meditationBtn.addEventListener("click", playMeditation);
+waterRemoveBtn.addEventListener("click", playWaterRemove); // NEW
 
 // Mute / Unmute
 muteBtn.addEventListener("click", () => setMuted(false));
