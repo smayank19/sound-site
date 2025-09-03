@@ -1,0 +1,67 @@
+/* ==================================================
+   MINI GUIDE: HOW TO ADD A NEW MODE (VIDEO + AUDIO)
+   ==================================================
+
+   STEP 1: ELEMENT SELECTION
+   -------------------------
+   - Add new video <video> and audio <audio> elements in HTML.
+   - In the JS "ELEMENT SELECTION" section, create a variable for them.
+     Example:
+       const newVideo = document.querySelector(".new-v");
+       const newAudio = document.querySelector(".new-a");
+       const newBtn   = document.querySelector(".button-9");
+
+   STEP 2: ADD TO MODES
+   --------------------
+   - Inside the "modes" object, add a new entry:
+       newMode: { 
+           video: newVideo, 
+           audio: newAudio, 
+           btn: newBtn, 
+           title: "NEWMODE", 
+           color: "white" 
+       }
+
+   STEP 3: BUTTON EVENT
+   --------------------
+   - Add event listener in the "Button clicks" section:
+       newBtn.addEventListener("click", () => playMode("newMode"));
+
+   STEP 4: KEYBOARD SHORTCUT (OPTIONAL)
+   ------------------------------------
+   - Add a new case inside the keyboard "switch" statement:
+       case "Digit7": case "Numpad7": playMode("newMode"); break;
+
+   STEP 5: STYLE / CUSTOMIZATION
+   -----------------------------
+   - Update CSS if needed (button position, video styling, etc.)
+   - Change highlight color in "modes" entry if you want a unique color.
+   - Done! 🎉
+
+   ==================================================
+   SECRET VIDEO SECTION
+   ==================================================
+   - All secret video logic is at the bottom of the file.
+   - You normally don’t need to touch it.
+   - If you want to disable secrets, just comment out Section 7.
+   - If you add a new button, no changes are needed here (it’s auto handled).
+
+   ==================================================
+   QUICK TIPS
+   ==================================================
+   - To change default startup video → look at "INITIAL SETUP".
+   - To change default mute/unmute behavior → also in "INITIAL SETUP".
+   - To change how long clicks unlock the secret → look at clickCount (11).
+   - To change secret code → update SECRET_CODE string.
+
+   ==================================================
+   FILE STRUCTURE (for easy navigation)
+   ==================================================
+   1. ELEMENT SELECTION
+   2. MODE CONFIGURATION
+   3. HELPER FUNCTIONS
+   4. CORE FUNCTION - playMode()
+   5. EVENT LISTENERS
+   6. INITIAL SETUP
+   7. SECRET VIDEO LOGIC (kept at bottom, isolated)
+*/
