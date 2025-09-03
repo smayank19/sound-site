@@ -59,7 +59,7 @@ FONT USE
   height: 100vh;         
 
   object-fit: cover;     /* no cropping, full video visible */
-  z-index: 99;           
+  z-index: -1;           
 }
 
 

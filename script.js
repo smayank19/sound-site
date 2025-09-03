@@ -32,24 +32,36 @@ function applyMutedUI(isMuted) {
 
 // Helpers (update mute function)
 function setMuted(isMuted) {
+    // Normal audios
     rainAudio.muted = isMuted;
     windAudio.muted = isMuted;
     birdAudio.muted = isMuted;
     waterAudio.muted = isMuted;
     meditationAudio.muted = isMuted;
-    waterRemoveAudio.muted = isMuted;   // NEW
+    waterRemoveAudio.muted = isMuted;
 
+    // Secret video
+    if (secretVideo) secretVideo.muted = isMuted;
+
+    // Update mute/unmute UI
     applyMutedUI(isMuted);
 
-    if (!isMuted) {
+    // Only play normal audio if not in secret mode and unmuted
+    if (!isMuted && !secretUnlocked) {
         if (rainVideo.style.display !== "none") rainAudio.play();
         else if (windVideo.style.display !== "none") windAudio.play();
         else if (birdVideo.style.display !== "none") birdAudio.play();
         else if (waterVideo.style.display !== "none") waterAudio.play();
         else if (meditationVideo.style.display !== "none") meditationAudio.play();
-        else if (waterRemoveVideo.style.display !== "none") waterRemoveAudio.play();  // NEW
+        else if (waterRemoveVideo.style.display !== "none") waterRemoveAudio.play();
+    }
+
+    // Play secret video if visible and unmuted
+    if (!isMuted && secretUnlocked && secretVideo.style.display !== "none") {
+        secretVideo.play();
     }
 }
+
 
 function resetBtnColors() {
     rainBtn.style.backgroundColor = "";
@@ -301,12 +313,12 @@ window.addEventListener("load", () => {
     setMuted(true);
 });
 
-//SECRET VIDEO 
-//SECRET VIDEO 
+ 
+//SECRET VIDEO CODE
 /*------------------------------------------------------------------------*/
 let clickCount = 0;
 let secretUnlocked = false;
-const SECRET_CODE = "dumbo";
+const SECRET_CODE = "edits";
 
 const secretBox = document.getElementById("secret-box");
 const input = document.getElementById("secret-input");
@@ -341,39 +353,69 @@ function checkSecret() {
         secretBox.style.display = "none";
     }
 }
+function getSecretVideoForDevice() {
+    const width = window.innerWidth;
+
+    if (width <= 768) {
+        // Mobile devices
+        return "ASSESTS/secret_mobile.mp4";
+    } else if (width <= 1024) {
+        // Tablets
+        return "ASSESTS/secret.mp4";
+    } else {
+        // Desktop
+        return "ASSESTS/secret.mp4";
+    }
+}
 
 function unlockSecretVideo() {
     secretUnlocked = true;
     clickCount = 0;
 
-    secretVideo.src = "ASSESTS/secret.mp4";
+    // Load appropriate secret video based on device
+    secretVideo.src = getSecretVideoForDevice();
     secretVideo.style.display = "block";
+    secretVideo.style.zIndex = -1; // behind buttons
 
+    // Pause all other videos but leave them visible
     document.querySelectorAll("video").forEach(v => {
-        if (v !== secretVideo) {
-            v.pause();
-            v.style.display = "none";
-        }
+        if (v !== secretVideo) v.pause();
     });
     document.querySelectorAll("audio").forEach(a => a.pause());
 
-    secretVideo.play();
-    showTitle("SECRET");
+    resetBtnColors(); // remove white from previous button
 
+    // Check if mobile device
+    const width = window.innerWidth;
+    if (width <= 768) {
+        showTitle("PLEASE ROTATE");
+    } else {
+        showTitle("SECRET");
+        secretVideo.play();
+    }
 }
 
-// Array of all normal video buttons
+
+
+// Reset secret video when a normal button is clicked
 const normalVideoButtons = [rainBtn, windBtn, birdBtn, waterBtn, meditationBtn, waterRemoveBtn];
 
-// Add a listener to hide the secret video when any normal button is clicked
 normalVideoButtons.forEach(btn => {
     btn.addEventListener("click", () => {
         if (secretUnlocked) {
             secretVideo.pause();
             secretVideo.style.display = "none";
             secretUnlocked = false;
+        }
 
-             resetBtnColors();
+        // Call the button’s existing function immediately
+        switch (btn) {
+            case rainBtn: playRain(); break;
+            case windBtn: playWind(); break;
+            case birdBtn: playBird(); break;
+            case waterBtn: playWater(); break;
+            case meditationBtn: playMeditation(); break;
+            case waterRemoveBtn: playWaterRemove(); break;
         }
     });
 });
