@@ -331,7 +331,7 @@ document.querySelectorAll("video").forEach(video => {
 
         clickCount++;
 
-        if (clickCount === 1) {
+        if (clickCount === 11) {
             secretBox.style.display = "block"; // show inside same div
             input.value = "";
             input.focus();
