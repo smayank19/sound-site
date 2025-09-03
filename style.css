@@ -177,15 +177,23 @@ FONT USE
          /* adjust focus */
      }
 
-     /* 
-     .water-v {
-         margin: 0;
-         padding: 0;
+     .water_remove-v {
          object-fit: cover;
-         object-position: 75% center;
-         transform: scale(2.2);
-     } 
-    */
+         object-position: 35% center;
+     }
+
+    #video-title {
+     font-size: 15px;
+     /* letter-spacing: 10px; */
+ }
+ }
+
+  @media (max-width: 600px) {
+     .meditation-v {
+         object-fit: cover;
+         object-position: 35% center;
+         /* adjust focus */
+     }
 
      .water_remove-v {
          object-fit: cover;
@@ -197,3 +205,13 @@ FONT USE
      /* letter-spacing: 10px; */
  }
  }
+
+
+ /* Tablets (portrait & landscape) */
+@media (min-width: 601px) and (max-width: 1024px) 
+{
+    .meditation-v {
+         object-fit: cover;
+         object-position: 35% center;
+     }
+}
