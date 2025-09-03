@@ -137,49 +137,50 @@ FONT USE
  }
 
  /* ANIMATIONS */
- #video-title {
-     position: absolute;
-     top: 20px;
-     left: 50%;
-     transform: translateX(-50%);
-     font-family: "Michroma", sans-serif;
-     font-size: 32px;
-     font-weight: 600;
-     color: rgba(255, 255, 255, 0.667);
-     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-     z-index: 999;
-     pointer-events: none;
-     opacity: 0;
-     /* letter-spacing: 10px; */
- }
+#video-title {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Michroma", sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.667);
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0;
 
- #video-title.show {
-     animation: fadeScale 3s ease forwards;
- }
+    /* underline tweaks */
+    text-decoration: underline;
+    text-underline-offset: 6px;          /* gap between text & line */
+    text-decoration-thickness: 1px;      /* line thickness */
+    text-decoration-color: rgba(255, 255, 255, 0.7); /* sleek white */
+}
 
- @keyframes fadeScale {
-     0% {
-         opacity: 0;
-         transform: translateX(-50%) scale(0.8);
-     }
+/* keep your fade animation */
+#video-title.show {
+    animation: fadeScale 3s ease forwards;
+}
 
-     20% {
-         opacity: 1;
-         transform: translateX(-50%) scale(1.05);
-     }
-
-     60% {
-         opacity: 1;
-         transform: translateX(-50%) scale(1);
-     }
-
-     100% {
-         opacity: 0;
-         transform: translateX(-50%) scale(0.9);
-     }
- }
-
-
+@keyframes fadeScale {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.8);
+    }
+    20% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.05);
+    }
+    60% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.9);
+    }
+}
 
  /* iPhone 12 Pro portrait */
  /* For all phone screens */
@@ -252,10 +253,10 @@ FONT USE
 
 /* Input */
 .secret-box input {
-  width: 100%;
+  display: block;          /* ensures it respects width */
+  width: 100%;             /* full width inside box */
   padding: 12px;
-  margin: 12px 0;
-  /* margin-bottom: 20px; */
+  margin: 12px auto;       /* centers if needed */
   font-size: 16px;
   border: none;
   outline: none;
@@ -264,9 +265,9 @@ FONT USE
   background: rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   color: white;
-  text-align: center;
+  text-align: center;      /* centers text inside field */
+  box-sizing: border-box;  /* makes sure padding doesn’t push width */
 }
-
 /* Button */
 .secret-box button {
   padding: 10px 22px;

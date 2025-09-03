@@ -254,7 +254,7 @@ function playWaterRemove() {
 
     resetBtnColors();
     waterRemoveBtn.style.backgroundColor = "#5cb5e1a4";
-    showTitle("WATER REMOVE");
+    showTitle("WATER REMOVER");
 }
 
 // Keyboard shortcuts
@@ -331,7 +331,7 @@ document.querySelectorAll("video").forEach(video => {
 
         clickCount++;
 
-        if (clickCount === 11) {
+        if (clickCount === 1) {
             secretBox.style.display = "block"; // show inside same div
             input.value = "";
             input.focus();
@@ -385,12 +385,15 @@ function unlockSecretVideo() {
 
     resetBtnColors(); // remove white from previous button
 
-    // Check if mobile device
+    // Check device width
     const width = window.innerWidth;
     if (width <= 768) {
+        // Mobile → Just show "PLEASE ROTATE" permanently
         showTitle("PLEASE ROTATE");
+        // Don't play secret video on mobile
     } else {
-        showTitle("SECRET");
+        // Desktop/Tablet → Play secret video with "SECRET"
+        showTitle("ENJOY!");
         secretVideo.play();
     }
 }
