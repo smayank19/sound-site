@@ -44,7 +44,7 @@ const modes = {
     bird:        { video: birdVideo, audio: birdAudio, btn: birdBtn, title: "BIRD",          color: "white" },
     water:       { video: waterVideo, audio: waterAudio, btn: waterBtn, title: "WATER",      color: "white" },
     meditation:  { video: meditationVideo, audio: meditationAudio, btn: meditationBtn, title: "MEDITATION", color: "white" },
-    waterRemove: { video: waterRemoveVideo, audio: waterRemoveAudio, btn: waterRemoveBtn, title: "WATER REMOVER", color: "#5cb5e1a4" }
+    waterRemove: { video: waterRemoveVideo, audio: waterRemoveAudio, btn: waterRemoveBtn, title: "W-REMOVER", color: "#5cb5e1a4" }
 
     // 👉 ADD NEW MODE HERE
     // newMode: { video: newVideo, audio: newAudio, btn: newBtn, title: "NEWMODE", color: "white" }
@@ -248,15 +248,28 @@ const submitBtn = document.getElementById("secret-submit");
 
 // Detect 11 clicks → show input box
 document.querySelectorAll("video").forEach(video => {
-    video.addEventListener("click", () => {
+    video.addEventListener("click", (e) => {
         if (secretUnlocked) return;
         clickCount++;
-        if (clickCount === 1) {
+        if (clickCount === 11) {
             secretBox.style.display = "block";
             input.value = "";
             input.focus();
+            e.stopPropagation(); // prevent document click from hiding popup immediately
         }
     });
+});
+
+// Input and submit should not close popup
+input.addEventListener("click", (e) => e.stopPropagation());
+submitBtn.addEventListener("click", (e) => e.stopPropagation());
+
+// Hide secret box if click outside of it
+document.addEventListener("click", (e) => {
+    if (secretBox.style.display === "block" && !secretBox.contains(e.target)) {
+        secretBox.style.display = "none";
+        clickCount = 0; // reset click counter
+    }
 });
 
 // Input handlers
@@ -314,7 +327,6 @@ function unlockSecretVideo() {
     secretVideo.play().catch(() => {/* if blocked, user can tap video to start */});
   }
 }
-
 
 // Exit secret mode if any normal button clicked
 [rainBtn, windBtn, birdBtn, waterBtn, meditationBtn, waterRemoveBtn].forEach(btn => {
